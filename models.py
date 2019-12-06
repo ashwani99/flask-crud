@@ -26,12 +26,17 @@ class Employee(db.Model):
 
     def assign_device(self, device):
         """ Assign a device to an `Employee` """
-        self.devices.append(device)
+        if device not in self.devices:
+            self.devices.append(device)
+            return True
+        return False
 
     def unassign_device(self, device):
         """ Un-assign a device to an `Employee` """
         if device in self.devices:
             self.devices.remove(device)
+            return True
+        return False
 
 
 class Device(db.Model):

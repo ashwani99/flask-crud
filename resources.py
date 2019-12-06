@@ -116,13 +116,14 @@ class DeviceAssignmentAction(Resource):
                                404)
         
         try:
-            emp.assign_device(device)
+            is_notify = emp.assign_device(device)
             db.session.commit()
         except IntegrityError:
             db.session.rollback()
             raise ApiException()
 
-        send_async_email.delay('email sent random text')
+        if is_notify:
+            send_async_email.delay('email sent random text')
 
         return make_response(jsonify(success=True, status="assigned"), 204)
 
@@ -139,13 +140,14 @@ class DeviceAssignmentAction(Resource):
                                404)
         
         try:
-            emp.unassign_device(device)
+            is_notify = emp.unassign_device(device)
             db.session.commit()
         except IntegrityError:
             db.session.rollback()
             raise ApiException()
 
-        send_async_email.delay('email sent random text')
+        if is_notify:
+            send_async_email.delay('email sent random text')
         
         return make_response(jsonify(success=True, status="un-assigned"), 204)
 

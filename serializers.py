@@ -5,6 +5,7 @@ from utils import is_mobile_number_valid
 
 
 def validate_mobile_number(number):
+    """ Validate a mobile number string """
     if not is_mobile_number_valid(number):
         raise ValidationError("Please provide a valid mobile number")
 
