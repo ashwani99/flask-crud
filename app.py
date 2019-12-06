@@ -1,28 +1,24 @@
 from flask import Flask
-from flask_restful import Api
-from flask_mail import Mail
 
 from models import db
-from utils import mail
+from mail import mail, celery
 from config import Config
-from resources import EmployeeCollection, EmployeeeResource, EmployeeDeviceResource, \
-    DeviceAssignmentAction
+from resources import api
 from exceptions import ApiException
 
 
+# initialising Flask
 app = Flask(__name__)
 app.config.from_object(Config)
-api = Api(app)
 
+# setting up extensions
+api.init_app(app)
 db.init_app(app)
-with app.app_context():
-    db.create_all()
 mail.init_app(app)
 
-api.add_resource(EmployeeCollection, '/employees')
-api.add_resource(EmployeeeResource, '/employee/<int:id>')
-api.add_resource(EmployeeDeviceResource, '/device', '/device/<int:id>')
-api.add_resource(DeviceAssignmentAction, '/device/<int:device_id>/assign/<int:emp_id>')
+with app.app_context():
+    db.create_all()
+
 
 @app.errorhandler(ApiException)
 def serialize_exceptions(e):

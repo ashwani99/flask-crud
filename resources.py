@@ -1,5 +1,5 @@
 from flask import request, jsonify, make_response
-from flask_restful import Resource
+from flask_restful import Api, Resource
 from sqlalchemy.exc import IntegrityError
 from marshmallow import ValidationError
 
@@ -7,7 +7,7 @@ from models import Employee, Device, db
 from serializers import employee_schema, employees_schema, device_schema, \
     devices_schema
 from exceptions import ApiException
-from utils import send_async_email
+from mail import send_async_email
 
 
 class EmployeeCollection(Resource):
@@ -122,7 +122,8 @@ class DeviceAssignmentAction(Resource):
             db.session.rollback()
             raise ApiException()
 
-        send_async_email('email sent random text')
+        send_async_email.delay('email sent random text')
+
         return make_response(jsonify(success=True, status="assigned"), 204)
 
 
@@ -144,6 +145,13 @@ class DeviceAssignmentAction(Resource):
             db.session.rollback()
             raise ApiException()
 
-        send_async_email('email sent random text')
-        return make_response(jsonify(success=True, status="un-assigned"), 204)
+        send_async_email.delay('email sent random text')
         
+        return make_response(jsonify(success=True, status="un-assigned"), 204)
+
+
+api = Api()
+api.add_resource(EmployeeCollection, '/employees')
+api.add_resource(EmployeeeResource, '/employee/<int:id>')
+api.add_resource(EmployeeDeviceResource, '/device', '/device/<int:id>')
+api.add_resource(DeviceAssignmentAction, '/device/<int:device_id>/assign/<int:emp_id>')
