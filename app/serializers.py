@@ -1,7 +1,7 @@
 from marshmallow import Schema, fields, post_load, ValidationError
 
-from models import Employee, Device
-from utils import is_mobile_number_valid
+from .models import Employee, Device
+from .utils import is_mobile_number_valid
 
 
 def validate_mobile_number(number):

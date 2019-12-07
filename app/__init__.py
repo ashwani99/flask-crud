@@ -1,10 +1,10 @@
 from flask import Flask
 
-from models import db
-from mail import mail, celery
-from config import Config
-from resources import api
-from exceptions import ApiException
+from .models import db
+from .mail import mail, celery
+from .config import Config
+from .resources import api
+from .exceptions import ApiException
 
 
 # initialising Flask

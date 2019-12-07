@@ -3,11 +3,11 @@ from flask_restful import Api, Resource
 from sqlalchemy.exc import IntegrityError
 from marshmallow import ValidationError
 
-from models import Employee, Device, db
-from serializers import employee_schema, employees_schema, device_schema, \
+from .models import Employee, Device, db
+from .serializers import employee_schema, employees_schema, device_schema, \
     devices_schema
-from exceptions import ApiException
-from mail import send_async_email
+from .exceptions import ApiException
+from .mail import send_async_email
 
 
 class EmployeeCollection(Resource):
