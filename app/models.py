@@ -52,3 +52,8 @@ class Device(db.Model):
         """ Represent `device` instance as a unique string """
         return "<Device({id!r})>".format(id=self.id)
 
+    @property
+    def is_assigned(self):
+        """ Checks if the device is assigned or not """
+        return self.device_assignee is not None
+

@@ -108,13 +108,15 @@ class DeviceAssignmentAction(Resource):
         """ Assign device to an employee """
         device = Device.query.get(device_id)
         if device is None:
-            raise ApiException(dict(message=[f"Not able to find any device with id {id}"]),
+            raise ApiException(dict(message=[f"Not able to find any device with id {device_id}"]),
                                404)
         emp = Employee.query.get(emp_id)
-        if device is None:
-            raise ApiException(dict(message=[f"Not able to find any employee with id {id}"]),
+        if emp is None:
+            raise ApiException(dict(message=[f"Not able to find any employee with id {emp_id}"]),
                                404)
-        
+        if device.is_assigned and emp != device.device_assignee:
+            raise ApiException(dict(message=[f"Device with id {device_id} is already assigned. Please un-assign it first before assigning again"]))
+
         try:
             is_notify = emp.assign_device(device)
             db.session.commit()
@@ -132,13 +134,16 @@ class DeviceAssignmentAction(Resource):
         """ Un-assign device from an employee """
         device = Device.query.get(device_id)
         if device is None:
-            raise ApiException(dict(message=[f"Not able to find any device with id {id}"]),
+            raise ApiException(dict(message=[f"Not able to find any device with id {device_id}"]),
                                404)
         emp = Employee.query.get(emp_id)
         if device is None:
-            raise ApiException(dict(message=[f"Not able to find any employee with id {id}"]),
+            raise ApiException(dict(message=[f"Not able to find any employee with id {emp_id}"]),
                                404)
-        
+        if device.is_assigned and emp != device.device_assignee:
+            raise ApiException(dict(message=[f"Device with id {device_id} not assigned to employee with id {emp_id}"]),
+                              404)
+
         try:
             is_notify = emp.unassign_device(device)
             db.session.commit()
