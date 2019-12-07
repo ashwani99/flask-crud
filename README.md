@@ -6,6 +6,7 @@ This application has the following endpoints
 
 | URL endpoint | Method type | Description |
 |---|---|---|
+| `/` | `GET` | Home page |
 | `/employees` | `GET` | Get list of all the employees |
 | `/employees` | `POST` | Create a new employee |
 | `/employee/<:id>` | `GET` | Get details of a particular employee with given `id`|
@@ -16,7 +17,10 @@ This application has the following endpoints
 | `/device/<:device_id>/assign/<:emp_id>` | `PUT` | Assign device with `device_id` to employee with `emp_id` |
 | `/device/<:device_id>/assign/<:emp_id>` | `DELETE` | Un-assign device with `device_id` from employee with `emp_id` |
 
-There is a [postmand collection](/postman/Flask\ CRUD\ APP.postman_collection.json) available with all requests. You can import the collection in your [Postman](https://www.getpostman.com/) application using the JSON file.
+There is a [postmand collection](/postman/Flask_CRUD_APP.postman_collection.json) available with all requests. You can import the collection in your [Postman](https://www.getpostman.com/) application using the JSON file.
+
+## Demo
+https://flask-crud-ashwani.herokuapp.com/
 
 ## Local environment setup
 

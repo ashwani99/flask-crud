@@ -10,6 +10,16 @@ from .exceptions import ApiException
 from .mail import send_async_email
 
 
+class IndexPageResource(Resource):
+    def get(self):
+        html_message = """<p>
+            Welcome to flask-crud application. Refer README instructions here for documentation: 
+            <a href="https://github.com/ashwani99/flask-crud">https://github.com/ashwani99/flask-crud</a>
+        </p>"""
+        headers={'Content-Type': 'text/html'}
+        return make_response(html_message, 200, headers)
+
+
 class EmployeeCollection(Resource):
     def get(self):
         """ Get all the employees """
@@ -164,6 +174,7 @@ class DeviceAssignmentAction(Resource):
 
 
 api = Api()
+api.add_resource(IndexPageResource, '/')
 api.add_resource(EmployeeCollection, '/employees')
 api.add_resource(EmployeeeResource, '/employee/<int:id>')
 api.add_resource(EmployeeDeviceResource, '/device', '/device/<int:id>')
