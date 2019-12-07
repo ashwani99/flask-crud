@@ -9,12 +9,12 @@ celery = Celery(__name__, broker=Config.CELERY_BROKER_URL)
 # celery.conf.update()
 
 @celery.task(bind=True)
-def send_async_email(self, mail_body):
+def send_async_email(self, subject, mail_body, recipients):
     """ Sends a e-mail notification """
-    msg = Message(subject="Important email from CRUD app",
-                  recipients=["user@example.com"],
+    msg = Message(subject=subject,
+                  recipients=recipients,
                   body=mail_body,
-                  sender="admin-crud@example.com")
+                  sender=Config.ADMIN_EMAIL)
     from app import app
     with app.app_context():
         mail.send(msg)

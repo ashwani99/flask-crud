@@ -125,7 +125,10 @@ class DeviceAssignmentAction(Resource):
             raise ApiException()
 
         if is_notify:
-            send_async_email.delay('email sent random text')
+            mail_subject = "New Device Assigned"
+            recipients = [emp.email]
+            mail_body = f"Hi {emp.firstname},\nYou have been assigned a new device {device.device_name}\nThanks,\nFlask CRUD Admin"
+            send_async_email.delay(mail_subject, mail_body, recipients)
 
         return make_response(jsonify(success=True, status="assigned"), 204)
 
@@ -152,7 +155,10 @@ class DeviceAssignmentAction(Resource):
             raise ApiException()
 
         if is_notify:
-            send_async_email.delay('email sent random text')
+            mail_subject = "Device Unassigned"
+            recipients = [emp.email]
+            mail_body = f"Hi {emp.firstname},\nYour device {device.device_name} has been un-assigned from you\nThanks,\nFlask CRUD Admin"
+            send_async_email.delay(mail_subject, mail_body, recipients)
         
         return make_response(jsonify(success=True, status="un-assigned"), 204)
 
