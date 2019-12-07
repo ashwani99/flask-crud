@@ -1,0 +1,211 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Flask CRUD APP",
+		"_postman_id": "6e905d93-6fb4-d922-115c-d58549c56475",
+		"description": "A simple CRUD application built using Flask",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "employee",
+			"description": "",
+			"item": [
+				{
+					"name": "127.0.0.1:5000/employees",
+					"request": {
+						"url": "127.0.0.1:5000/employees",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"john@cena.com\",\n\t\"password\": \"johncena\"\n}"
+						},
+						"description": "Get all the employees"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:5000/employees",
+					"request": {
+						"url": "127.0.0.1:5000/employees",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstname\": \"ashwani\",\n\t\"lastname\": \"gupta\",\n\t\"email\": \"hey@example.com\",\n\t\"mobile_number\": \"9876543210\"\n}"
+						},
+						"description": "Create a new employee"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:5000/employee/1",
+					"request": {
+						"url": "127.0.0.1:5000/employee/1",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstname\": \"ashwani\",\n\t\"lastname\": \"gupta\"\n}"
+						},
+						"description": "Get a employee details"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:5000/employee/1",
+					"request": {
+						"url": "127.0.0.1:5000/employee/2",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"email\": \"hey@example.com\",\n  \"firstname\": \"ashwani\",\n  \"lastname\": \"gupta\",\n  \"mobile_number\": \"9876543210\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "device",
+			"description": "",
+			"item": [
+				{
+					"name": "127.0.0.1:5000/device/1",
+					"request": {
+						"url": "127.0.0.1:5000/device/1",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"device_name\": \"Nokia\"\n}"
+						},
+						"description": "Get a device details"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:5000/device",
+					"request": {
+						"url": "127.0.0.1:5000/device",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"device_name\": \"Nokia\"\n}"
+						},
+						"description": "Create a new device"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:5000/device/1/assign/1",
+					"request": {
+						"url": "127.0.0.1:5000/device/1/assign/1",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"device_name\": \"Nokia\"\n}"
+						},
+						"description": "Assign a device to an employee"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:5000/device/1/assign/1",
+					"request": {
+						"url": "127.0.0.1:5000/device/1/assign/1",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"device_name\": \"Nokia\"\n}"
+						},
+						"description": "Un-assign a device from an employee"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:5000/device/1",
+					"request": {
+						"url": "127.0.0.1:5000/device/1",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"device_name\": \"Samsung\"\n}"
+						},
+						"description": "Update device details"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
