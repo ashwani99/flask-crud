@@ -68,5 +68,11 @@ flask run --port=5000
 
 That's it! The API will be serving on `http://127.0.0.1:5000`
 
+For email notifications, you can change `MAIL_SERVER`, `MAIL_PORT` variables in `config.py`. Currently they are set on localhost port 8025 by default. To see emails notifications working, spin up a local SMTP server using Python's `smtpd` module
+
+```sh
+python3 -m smtpd -n -c DebuggingServer localhost:8025
+```
+
 ## License
 GNU GPL 3.0
